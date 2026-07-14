@@ -144,7 +144,7 @@ def main() -> None:
     if submitted:
     
         # Validate inputs first
-        if msc <= 0:
+        if msc < 20500:
             st.error("Monthly Salary Credit must be greater than 0.")
             st.stop()
     
