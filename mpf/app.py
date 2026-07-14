@@ -13,39 +13,82 @@ def main() -> None:
     st.set_page_config(page_title="SSS MPF Calculator", page_icon="💰", layout="wide")
     st.title("SSS Mandatory Provident Fund Calculator")
     st.caption("Estimate the monthly pension, review the contribution schedule, and download Excel results from any browser.")
+col1, col2 = st.columns(2)
+    
+    with col1:
+        age = st.number_input(
+            "Age",
+            min_value=18,
+            max_value=59,
+            value=30,
+        )
+    
+        msc_option = st.selectbox(
+            "Monthly Salary Credit",
+            ["Min (20,500)", "Max (35,000)", "Other"],
+        )
+    
+        if msc_option == "Other":
+            msc = st.number_input(
+                "Enter MSC value",
+                min_value=0.0,
+                value=20500.0,
+                step=100.0,
+            )
+        elif msc_option == "Min (20,500)":
+            msc = 20500.0
+        else:
+            msc = 35000.0
+    
+    with col2:
+        annuity_option = st.selectbox(
+            "Benefit Duration",
+            ["5 years", "15 years", "Other"],
+        )
+    
+        if annuity_option == "Other":
+            annuity_years = st.number_input(
+                "Enter benefit duration",
+                min_value=1,
+                max_value=50,
+                value=5,
+            )
+        else:
+            annuity_years = 5 if annuity_option == "5 years" else 15
+    
+    submitted = st.button("Calculate")
+    # with st.form("calculator_form"):
+    #     col1, col2 = st.columns(2)
 
-    with st.form("calculator_form"):
-        col1, col2 = st.columns(2)
+    #     with col1:
+    #         age = st.number_input("Age", min_value=18, max_value=59, value=30, step=1)
+    #         msc_option = st.selectbox("Monthly Salary Credit", ["Min (20,500)", "Max (35,000)", "Other"])
+    #         msc_custom = 20500.0
 
-        with col1:
-            age = st.number_input("Age", min_value=18, max_value=59, value=30, step=1)
-            msc_option = st.selectbox("Monthly Salary Credit", ["Min (20,500)", "Max (35,000)", "Other"])
-            msc_custom = 20500.0
+    #         if msc_option == "Other":
+    #             msc_custom = st.number_input("Custom MSC value", min_value=0.0, value=20500.0, step=100.0)
 
-            if msc_option == "Other":
-                msc_custom = st.number_input("Custom MSC value", min_value=0.0, value=20500.0, step=100.0)
+    #         if msc_option == "Min (20,500)":
+    #             msc = 20500.0
+    #         elif msc_option == "Max (35,000)":
+    #             msc = 35000.0
+    #         else:
+    #             msc = msc_custom
 
-            if msc_option == "Min (20,500)":
-                msc = 20500.0
-            elif msc_option == "Max (35,000)":
-                msc = 35000.0
-            else:
-                msc = msc_custom
+    #     with col2:
+    #         annuity_option = st.selectbox("Benefit Duration", ["5 years", "15 years", "Other"])
+    #         if annuity_option == "Other":
+    #             annuity_years = st.number_input(
+    #                 "Enter benefit duration in years",
+    #                 min_value=1,
+    #                 max_value=50,
+    #                 value=5,
+    #                 step=1,
+    #             )
+    #         else:
+    #             annuity_years = 5 if annuity_option == "5 years" else 15
 
-        with col2:
-            annuity_option = st.selectbox("Benefit Duration", ["5 years", "15 years", "Other"])
-            if annuity_option == "Other":
-                annuity_years = st.number_input(
-                    "Enter benefit duration in years",
-                    min_value=1,
-                    max_value=50,
-                    value=5,
-                    step=1,
-                )
-            else:
-                annuity_years = 5 if annuity_option == "5 years" else 15
-
-        submitted = st.form_submit_button("Calculate")
+    #     submitted = st.form_submit_button("Calculate")
 
     if submitted:
         try:
