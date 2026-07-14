@@ -31,8 +31,8 @@ def main() -> None:
         if msc_option == "Other":
             msc = st.number_input(
                 "Enter MSC value",
-                min_value=0.0,
-                value=20500.0,
+                min_value=20500,
+                value=0,
                 step=100.0,
             )
         elif msc_option == "Min (20,500)":
