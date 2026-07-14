@@ -26,11 +26,11 @@ def main() -> None:
                 msc_custom = st.number_input('Custom MSC value', min_value=0.0, value=20500.0, step=100.0)
     
             if msc_option == 'Min (20,500)':
-            msc = 20500.0
+                msc = 20500.0
             elif msc_option == 'Max (35,000)':
-            msc = 35000.0
+                msc = 35000.0
             else:
-            msc = msc_custom
+                msc = msc_custom
             
             # if msc_option == "Other":
             #     msc = st.number_input(
