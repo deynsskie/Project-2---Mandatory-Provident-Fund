@@ -23,7 +23,7 @@ def main() -> None:
             msc_custom = 20500.0
 
             if msc_option == 'Other':
-            msc_custom = st.number_input('Custom MSC value', min_value=0.0, value=20500.0, step=100.0)
+                msc_custom = st.number_input('Custom MSC value', min_value=0.0, value=20500.0, step=100.0)
     
             if msc_option == 'Min (20,500)':
             msc = 20500.0
