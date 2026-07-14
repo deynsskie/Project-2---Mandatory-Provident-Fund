@@ -142,13 +142,14 @@ def main() -> None:
     #     except Exception as exc:
     #         st.error(f"Unable to calculate results: {exc}")
     if submitted:
-
-        if annuity_years <= 0:
-            st.error("Benefit duration must be at least 1 year.")
-            st.stop()
+        
         # Validate inputs first
         if msc < 20500 or msc > 35000:
             st.error("Monthly Salary Credit must be within the range [20500, 35000].")
+            st.stop()
+
+        if annuity_years <= 0:
+            st.error("Benefit duration must be at least 1 year.")
             st.stop()
 
     
