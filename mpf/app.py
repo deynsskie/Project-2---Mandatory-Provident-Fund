@@ -243,6 +243,7 @@ if submitted:
         for error in errors:
             st.error(error)
     else:
+        st.info("Fill in the form and click Calculate to see the results.")
         try:
             monthly_pension, total_benefits_claimed, taav, df = calculate(
                 int(age),
@@ -312,8 +313,6 @@ if submitted:
 
         except Exception as exc:
             st.exception(exc)
-    else:
-        st.info("Fill in the form and click Calculate to see the results.")
-
+            
 if __name__ == "__main__":
     main()
