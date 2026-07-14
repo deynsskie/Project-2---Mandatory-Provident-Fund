@@ -13,7 +13,7 @@ def main() -> None:
     st.set_page_config(page_title="SSS MPF Calculator", page_icon="💰", layout="wide")
     st.title("SSS Mandatory Provident Fund Calculator")
     st.caption("Estimate the monthly pension, review the contribution schedule, and download Excel results from any browser.")
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     
     with col1:
         age = st.number_input(
