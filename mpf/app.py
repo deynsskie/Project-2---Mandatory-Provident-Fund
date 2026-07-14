@@ -141,25 +141,115 @@ def main() -> None:
     #             )
     #     except Exception as exc:
     #         st.error(f"Unable to calculate results: {exc}")
-    if submitted:
+    # if submitted:
         
-        # Validate inputs first
-        if msc < 20500 or msc > 35000:
-            st.error("Monthly Salary Credit must be within the range [20500, 35000].")
-            st.stop()
+    #     # Validate inputs first
+    #     if msc < 20500 or msc > 35000:
+    #         st.error("Monthly Salary Credit must be within the range [20500, 35000].")
+    #         st.stop()
 
-        if annuity_years <= 0:
-            st.error("Benefit duration must be at least 1 year.")
-            st.stop()
+    #     if annuity_years <= 0:
+    #         st.error("Benefit duration must be at least 1 year.")
+    #         st.stop()
 
     
+    #     try:
+    #         monthly_pension, total_benefits_claimed, taav, df = calculate(
+    #             int(age),
+    #             float(msc),
+    #             int(annuity_years),
+    #         )
+    
+    #         add_result_to_buffer(
+    #             df,
+    #             age=int(age),
+    #             msc=float(msc),
+    #             annuity_years=int(annuity_years),
+    #         )
+    
+    #         col_a, col_b, col_c = st.columns(3)
+    #         with col_a:
+    #             st.metric("Estimated Monthly Pension", f"₱{monthly_pension:,.2f}")
+    #         with col_b:
+    #             st.metric("Total Benefits Claimed", f"₱{total_benefits_claimed:,.2f}")
+    #         with col_c:
+    #             st.metric(
+    #                 "TAAV at Retirement",
+    #                 f"₱{taav:,.2f}" if taav is not None else "N/A"
+    #             )
+    
+    #         st.dataframe(df, use_container_width=True, height=450)
+    
+    #         latest_bytes = build_excel_bytes(
+    #             df,
+    #             age=int(age),
+    #             msc=float(msc),
+    #             annuity_years=int(annuity_years),
+    #         )
+    
+    #         buffer_bytes = (
+    #             build_buffer_excel_bytes()
+    #             if get_buffer_count() >= 1
+    #             else None
+    #         )
+    
+    #         col_d, col_e, col_f = st.columns(3)
+    
+    #         with col_d:
+    #             st.download_button(
+    #                 "Download Latest Excel",
+    #                 data=latest_bytes,
+    #                 file_name=f"mpf_results_age_{int(age)}.xlsx",
+    #                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    #             )
+    
+    #         with col_e:
+    #             st.download_button(
+    #                 "Download All Saved Results",
+    #                 data=buffer_bytes,
+    #                 file_name="mpf_buffered_results.xlsx",
+    #                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    #                 disabled=buffer_bytes is None,
+    #             )
+    
+    #         with col_f:
+    #             st.download_button(
+    #                 "Download CSV",
+    #                 data=df.to_csv(index=False).encode("utf-8"),
+    #                 file_name=f"mpf_results_age_{int(age)}.csv",
+    #                 mime="text/csv",
+    #             )
+    
+    #     except Exception as exc:
+    #         st.exception(exc)
+    # else:
+    #     st.info("Fill in the form and click Calculate to see the results.")
+
+
+if submitted:
+
+    errors = []
+
+    if age < 22 or age > 59:
+        errors.append("Age must be between 22 and 59.")
+
+    if msc < 20500 or msc > 35000:
+        errors.append("Monthly Salary Credit must be within the range [20,500, 35,000].")
+
+    if annuity_years <= 0:
+        errors.append("Benefit duration must be at least 1 year.")
+
+    if errors:
+        for error in errors:
+            st.error(error)
+    else:
         try:
             monthly_pension, total_benefits_claimed, taav, df = calculate(
                 int(age),
                 float(msc),
                 int(annuity_years),
             )
-    
+
             add_result_to_buffer(
                 df,
                 age=int(age),
@@ -219,10 +309,11 @@ def main() -> None:
                     file_name=f"mpf_results_age_{int(age)}.csv",
                     mime="text/csv",
                 )
-    
+
         except Exception as exc:
             st.exception(exc)
     else:
         st.info("Fill in the form and click Calculate to see the results.")
+
 if __name__ == "__main__":
     main()
