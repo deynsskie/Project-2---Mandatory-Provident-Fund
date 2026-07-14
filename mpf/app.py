@@ -49,7 +49,7 @@ def main() -> None:
         if annuity_option == "Other":
             annuity_years = st.number_input(
                 "Enter benefit duration",
-                min_value=1,
+                min_value=0,
                 max_value=50,
                 value=5,
             )
