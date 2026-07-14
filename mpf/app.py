@@ -225,6 +225,7 @@ def main() -> None:
     # else:
     #     st.info("Fill in the form and click Calculate to see the results.")
 
+    st.info("Fill in the form and click Calculate to see the results.")
 
     if submitted:
 
@@ -243,7 +244,6 @@ def main() -> None:
             for error in errors:
                 st.error(error)
         else:
-            st.info("Fill in the form and click Calculate to see the results.")
             try:
                 monthly_pension, total_benefits_claimed, taav, df = calculate(
                     int(age),
