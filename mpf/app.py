@@ -20,17 +20,28 @@ def main() -> None:
         with col1:
             age = st.number_input("Age", min_value=18, max_value=59, value=30, step=1)
             msc_option = st.selectbox("Monthly Salary Credit", ["Min (20,500)", "Max (35,000)", "Other"])
+            msc_custom = 20500.0
 
-            if msc_option == "Other":
-                msc = st.number_input(
-                    "Enter MSC",
-                    min_value=20500.0,
-                    max_value=35000.0,
-                    value=20500.0,
-                    step=100.0,
-                )
+            if msc_option == 'Other':
+            msc_custom = st.number_input('Custom MSC value', min_value=0.0, value=20500.0, step=100.0)
+
+            if msc_option == 'Min (20,500)':
+            msc = 20500.0
+            elif msc_option == 'Max (35,000)':
+            msc = 35000.0
             else:
-                msc = 20500.0 if msc_option == "Min (20,500)" else 35000.0
+            msc = msc_custom
+            
+            # if msc_option == "Other":
+            #     msc = st.number_input(
+            #         "Enter MSC",
+            #         min_value=20500.0,
+            #         max_value=35000.0,
+            #         value=20500.0,
+            #         step=100.0,
+            #     )
+            # else:
+            #     msc = 20500.0 if msc_option == "Min (20,500)" else 35000.0
 
         with col2:
             annuity_option = st.selectbox("Benefit Duration", ["5 years", "15 years", "Other"])
