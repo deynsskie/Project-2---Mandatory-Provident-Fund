@@ -234,7 +234,7 @@ def main() -> None:
             errors.append("Age must be between 22 and 59.")
     
         if msc < 20500 or msc > 35000:
-            errors.append("Monthly Salary Credit must be within the range [20,500, 35,000].")
+            errors.append("Monthly Salary Credit must be within the range [20500, 35000].")
     
         if annuity_years <= 0:
             errors.append("Benefit duration must be at least 1 year.")
