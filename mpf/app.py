@@ -230,7 +230,7 @@ def main() -> None:
 
         errors = []
     
-        if age < 22 or age > 59:
+        if age < 20 or age > 59:
             errors.append("Age must be between 22 and 59.")
     
         if msc < 20500 or msc > 35000:
