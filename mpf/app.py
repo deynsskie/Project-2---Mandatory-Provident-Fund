@@ -45,16 +45,16 @@ def main() -> None:
 
         # with col2:
     annuity_option = st.selectbox("Benefit Duration", ["5 years", "15 years", "Other"])
-        if annuity_option == "Other":
-            annuity_years = st.number_input(
+    if annuity_option == "Other":
+        annuity_years = st.number_input(
                 "Enter benefit duration in years",
                 min_value=1,
                 max_value=50,
                 value=5,
                 step=1,
             )
-        else:
-            annuity_years = 5 if annuity_option == "5 years" else 15
+    else:
+        annuity_years = 5 if annuity_option == "5 years" else 15
 
     submitted = st.form_submit_button("Calculate")
 
