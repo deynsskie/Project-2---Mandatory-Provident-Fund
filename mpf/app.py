@@ -144,8 +144,8 @@ def main() -> None:
     if submitted:
     
         # Validate inputs first
-        if msc < 20500:
-            st.error("Monthly Salary Credit must be greater than the minimum MSC (20500).")
+        if msc < 20500 or msc > 35000:
+            st.error("Monthly Salary Credit must be within the range [20500, 35000].")
             st.stop()
     
         if annuity_years <= 0:
