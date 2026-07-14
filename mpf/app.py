@@ -3,7 +3,7 @@ import streamlit as st
 from calculator import calculate
 from excel_export import (
     add_result_to_buffer,
-    build_result_excel_bytes,
+    build_excel_bytes,
     build_buffer_excel_bytes,
     get_buffer_count,
 )
