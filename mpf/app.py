@@ -27,6 +27,8 @@ def main() -> None:
         msc_option = st.selectbox(
             "Monthly Salary Credit",
             ["Min (20,500)", "Max (35,000)", "Other"],
+            index=None,
+            placeholder="Select monthly salary credit"
         )
     
         if msc_option == "Other":
