@@ -88,7 +88,7 @@ class CalculatorApp:
     def enter_data(self):
         try:
             age = int(self.age_spinbox.get())
-            if age >= 60:
+            if age < 18 or age > 59:
                 raise ValueError
         except ValueError:
             messagebox.showerror("Error", "Enter a valid age (must be under retirement age 60).")
