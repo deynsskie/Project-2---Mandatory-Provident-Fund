@@ -268,6 +268,21 @@ def main() -> None:
                     float(msc),
                     int(annuity_years),
                 )
+                # metadata = {
+                #     "Age": int(age),
+                #     "Monthly Salary Credit": float(msc),
+                #     "Benefit Duration (Years)": int(annuity_years),
+                #     "Estimated Monthly Pension": monthly_pension,
+                #     "Total Benefits Claimed": total_benefits_claimed,
+                #     "TAAV at Retirement": taav,
+                # }
+                # add_result_to_buffer(
+                #     df,
+                #     age=int(age),
+                #     msc=float(msc),
+                #     annuity_years=int(annuity_years),
+                # )   
+
                 metadata = {
                     "Age": int(age),
                     "Monthly Salary Credit": float(msc),
@@ -276,8 +291,10 @@ def main() -> None:
                     "Total Benefits Claimed": total_benefits_claimed,
                     "TAAV at Retirement": taav,
                 }
+                
                 add_result_to_buffer(
-                    df,
+                    df=df,
+                    metadata=metadata,
                     age=int(age),
                     msc=float(msc),
                     annuity_years=int(annuity_years),
@@ -312,7 +329,11 @@ def main() -> None:
                 latest_bytes = build_excel_bytes(
                     df=df,
                     metadata=metadata,
+                    age=int(age),
+                    msc=float(msc),
+                    annuity_years=int(annuity_years),
                 )
+
                 buffer_bytes = (
                     build_buffer_excel_bytes()
                     if get_buffer_count() >= 1
