@@ -7,7 +7,10 @@ from excel_export import (
     build_excel_bytes,
     get_buffer_count,
 )
+import inspect
+import excel_export
 
+st.write(inspect.signature(excel_export.build_excel_bytes))
 
 def main() -> None:
     st.set_page_config(page_title="SSS MPF Calculator", page_icon="💰", layout="wide")
