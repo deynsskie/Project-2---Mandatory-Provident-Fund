@@ -20,7 +20,7 @@ def main() -> None:
             "Age",
             # min_value=18,
             # max_value=59,
-            value=30,
+            value=20,
             step=1,
         )
     
