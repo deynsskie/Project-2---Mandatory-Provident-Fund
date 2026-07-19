@@ -18,9 +18,10 @@ def main() -> None:
     with col1:
         age = st.number_input(
             "Age",
-            min_value=18,
-            max_value=59,
+            # min_value=18,
+            # max_value=59,
             value=30,
+            step=1,
         )
     
         msc_option = st.selectbox(
@@ -239,7 +240,7 @@ def main() -> None:
         errors = []
     
         if age < 20 or age > 59:
-            errors.append("Age must be between 22 and 59.")
+            errors.append("Age must be between 20 and 59.")
     
         if msc < 20500 or msc > 35000:
             errors.append("Monthly Salary Credit must be within the range [20500, 35000].")
