@@ -301,12 +301,16 @@ def main() -> None:
                 #     msc=float(msc),
                 #     annuity_years=int(annuity_years),
                 # )
+                # latest_bytes = build_excel_bytes(
+                #     df,
+                #     metadata,
+                #     age=int(age),
+                #     msc=float(msc),
+                #     annuity_years=int(annuity_years),
+                # )
                 latest_bytes = build_excel_bytes(
-                    df,
-                    metadata,
-                    age=int(age),
-                    msc=float(msc),
-                    annuity_years=int(annuity_years),
+                    df=df,
+                    metadata=metadata,
                 )
                 buffer_bytes = (
                     build_buffer_excel_bytes()
