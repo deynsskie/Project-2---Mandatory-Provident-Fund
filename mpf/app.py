@@ -8,11 +8,6 @@ from excel_export import (
     get_buffer_count,
 )
 
-# import inspect
-# import excel_export
-
-# st.write(inspect.signature(excel_export.build_excel_bytes))
-
 def main() -> None:
     st.set_page_config(page_title="SSS MPF Calculator", page_icon="💰", layout="wide")
     st.title("SSS Mandatory Provident Fund Calculator")
@@ -22,8 +17,6 @@ def main() -> None:
     with col1:
         age = st.number_input(
             "Age",
-            # min_value=18,
-            # max_value=59,
             value=0,
             step=1,
         )
