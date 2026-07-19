@@ -283,20 +283,9 @@ def main() -> None:
                 #     annuity_years=int(annuity_years),
                 # )   
 
-                metadata = {
-                    "Starting Age": int(age),
-                    "Monthly Salary Credit (₱)": f"{msc:,.2f}",
-                    "Annuity Duration (Years)": int(annuity_years),
-                    "TAAV at Retirement (₱)": f"{taav:,.2f}",
-                    "Estimated Monthly Pension (₱)": f"{monthly_pension:,.2f}",
-                    "Total Benefits Claimed (₱)": f"{total_benefits_claimed:,.2f}",
-                    "Total Investment Income (₱)": f"{investment_income:,.2f}",
-                    "Total Management Fees (₱)": f"{management_fees:,.2f}",
-                }
-                
                 add_result_to_buffer(
                     df=df,
-                    metadata=metadata,
+                    metadata=summary_metadata,
                     age=int(age),
                     msc=float(msc),
                     annuity_years=int(annuity_years),
@@ -330,7 +319,7 @@ def main() -> None:
                 # )
                 latest_bytes = build_excel_bytes(
                     df=df,
-                    metadata=metadata,
+                    metadata=summary_metadata,
                     age=int(age),
                     msc=float(msc),
                     annuity_years=int(annuity_years),
