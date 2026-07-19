@@ -36,10 +36,10 @@ class CalculatorApp:
         # 3. Benefit Duration Input
         self.benefit_label = ttk.Label(user_info_frame, text="Benefit Duration:")
         self.benefit_label.pack(anchor="w", pady=(5, 2))
-        self.benefit_combobox = ttk.Combobox(user_info_frame, values=["5 years", "15 years", "Other"], state="readonly")
+        self.benefit_combobox = ttk.Combobox(user_info_frame, values=["5 years", "10 years", "15 years", "Other"], state="readonly")
         self.benefit_combobox.pack(fill="x", pady=(0, 10))
-        self.benefit_combobox.bind("<<ComboboxSelected>>", self.toggle_benefit_entry)
-        self.benefit_other_entry = ttk.Entry(user_info_frame)
+        # self.benefit_combobox.bind("<<ComboboxSelected>>", self.toggle_benefit_entry)
+        # self.benefit_other_entry = ttk.Entry(user_info_frame)
 
         # Action Button
         submit_button = ttk.Button(main_frame, text="Calculate My MPF", command=self.enter_data)
@@ -77,13 +77,13 @@ class CalculatorApp:
 
         self.master.update_idletasks()
 
-    def toggle_benefit_entry(self, event):
-        if self.benefit_combobox.get() == "Other":
-            self.benefit_other_entry.pack(fill="x", pady=(0, 10))
-        else:
-            self.benefit_other_entry.pack_forget()
+    # def toggle_benefit_entry(self, event):
+    #     if self.benefit_combobox.get() == "Other":
+    #         self.benefit_other_entry.pack(fill="x", pady=(0, 10))
+    #     else:
+    #         self.benefit_other_entry.pack_forget()
 
-        self.master.update_idletasks()
+    #     self.master.update_idletasks()
 
     def enter_data(self):
         try:
@@ -112,16 +112,20 @@ class CalculatorApp:
 
         if self.benefit_combobox.get() == "5 years":
             annuity_years = 5
+        elif self.benefit_combobox.get() == "10 years":
+            annuity_years = 10
         elif self.benefit_combobox.get() == "15 years":
             annuity_years = 15
         else:
-            try:
-                annuity_years = int(self.benefit_other_entry.get())
-                if annuity_years <= 0:
-                    raise ValueError
-            except ValueError:
-                messagebox.showerror("Error", "Enter a valid benefit duration integer.")
-                return
+            messagebox.showerror("Error", "Please select a valid benefit duration option.")
+            return
+            # try:
+            #     annuity_years = int(self.benefit_other_entry.get())
+            #     if annuity_years <= 0:
+            #         raise ValueError
+            # except ValueError:
+            #     messagebox.showerror("Error", "Enter a valid benefit duration integer.")
+            #     return
             
         # Instead of doing calculation here, throw data to main.py
         self.on_submit_callback(age, MSC, annuity_years)
