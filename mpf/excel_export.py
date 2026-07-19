@@ -193,7 +193,7 @@ def _format_sheet_name(index, age=None, msc=None, annuity_years=None):
         else f"Years_{index}"
     )
     return f"{age_text}_{msc_text}_{years_text}"
-
+    
 
 def add_result_to_buffer(df, metadata, age=None, msc=None, annuity_years=None):
     """Store a calculation in memory."""
@@ -207,6 +207,16 @@ def add_result_to_buffer(df, metadata, age=None, msc=None, annuity_years=None):
         annuity_years=annuity_years,
     )
 
+    # Make sheet name unique if it already exists
+    existing = {name for name, _, _ in results_buffer}
+
+    base = sheet_name
+    counter = 2
+
+    while sheet_name in existing:
+        sheet_name = f"{base}_{counter}"
+        counter += 1
+
     results_buffer.append(
         (
             sheet_name,
@@ -217,7 +227,6 @@ def add_result_to_buffer(df, metadata, age=None, msc=None, annuity_years=None):
 
     return True
 
-
 def _build_export_writer(target):
     try:
         return pd.ExcelWriter(target, engine="xlsxwriter")
@@ -226,17 +235,10 @@ def _build_export_writer(target):
 
 
 def _write_sheet_with_metadata(writer, df, metadata, sheet_name):
-    """Write metadata block and calculation table."""
-
-    worksheet = writer.book.add_worksheet(sheet_name)
-    writer.sheets[sheet_name] = worksheet
-
-    metrics = pd.DataFrame(
-        {
-            "Summary Metric": list(metadata.keys()),
-            "Value": list(metadata.values()),
-        }
-    )
+    metrics = pd.DataFrame({
+        "Summary Metric": list(metadata.keys()),
+        "Value": list(metadata.values()),
+    })
 
     metrics.to_excel(
         writer,
@@ -254,6 +256,7 @@ def _write_sheet_with_metadata(writer, df, metadata, sheet_name):
         index=False,
     )
 
+    worksheet = writer.sheets[sheet_name]
 
 def _apply_column_widths(writer, df, sheet_name):
     try:
