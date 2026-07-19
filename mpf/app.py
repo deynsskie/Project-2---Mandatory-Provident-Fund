@@ -263,7 +263,7 @@ def main() -> None:
                 st.error(error)
         else:
             try:
-                monthly_pension, total_benefits_claimed, taav, df, investment_income, management_fees = calculate(
+                monthly_pension, total_benefits_claimed, taav, df, summary_metadata = calculate(
                     int(age),
                     float(msc),
                     int(annuity_years),
