@@ -263,7 +263,7 @@ def main() -> None:
                 st.error(error)
         else:
             try:
-                monthly_pension, total_benefits_claimed, taav, df = calculate(
+                monthly_pension, total_benefits_claimed, taav, df, investment_income, management_fees = calculate(
                     int(age),
                     float(msc),
                     int(annuity_years),
@@ -284,12 +284,14 @@ def main() -> None:
                 # )   
 
                 metadata = {
-                    "Age": int(age),
-                    "Monthly Salary Credit": float(msc),
-                    "Benefit Duration (Years)": int(annuity_years),
-                    "Estimated Monthly Pension": monthly_pension,
-                    "Total Benefits Claimed": total_benefits_claimed,
-                    "TAAV at Retirement": taav,
+                    "Starting Age": int(age),
+                    "Monthly Salary Credit (₱)": f"{msc:,.2f}",
+                    "Annuity Duration (Years)": int(annuity_years),
+                    "TAAV at Retirement (₱)": f"{taav:,.2f}",
+                    "Estimated Monthly Pension (₱)": f"{monthly_pension:,.2f}",
+                    "Total Benefits Claimed (₱)": f"{total_benefits_claimed:,.2f}",
+                    "Total Investment Income (₱)": f"{investment_income:,.2f}",
+                    "Total Management Fees (₱)": f"{management_fees:,.2f}",
                 }
                 
                 add_result_to_buffer(
