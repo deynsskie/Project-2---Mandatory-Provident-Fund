@@ -43,20 +43,27 @@ def main() -> None:
     with col2:
         annuity_option = st.selectbox(
             "Benefit Duration",
-            ["5 years", "15 years", "Other"],
+            ["5 years", "10 years", "15 years"],
         )
-    
-        if annuity_option == "Other":
-            annuity_years = st.number_input(
-                "Enter benefit duration",
-                min_value=0,
-                max_value=50,
-                value=5,
-            )
+
+        if annuity_option == "5 years":
+            annuity_years = 5
+        elif annuity_option == "10 years":
+            annuity_years = 10
         else:
-            annuity_years = 5 if annuity_option == "5 years" else 15
+            annuity_years = 15
     
-    submitted = st.button("Calculate")
+        # if annuity_option == "Other":
+        #     annuity_years = st.number_input(
+        #         "Enter benefit duration",
+        #         min_value=0,
+        #         max_value=50,
+        #         value=5,
+        #     )
+        # else:
+        #     annuity_years = 5 if annuity_option == "5 years" else 15
+    
+    submitted = st.button("Calculate my MPF")
     # with st.form("calculator_form"):
     #     col1, col2 = st.columns(2)
 
@@ -237,9 +244,11 @@ def main() -> None:
         if msc < 20500 or msc > 35000:
             errors.append("Monthly Salary Credit must be within the range [20500, 35000].")
     
-        if annuity_years <= 0:
-            errors.append("Benefit duration must be at least 1 year.")
-    
+        # if annuity_years <= 0:
+        #     errors.append("Benefit duration must be at least 1 year.")
+        if annuity_years is None:
+            errors.append("Please select a valid benefit duration option.")
+        
         if errors:
             for error in errors:
                 st.error(error)
