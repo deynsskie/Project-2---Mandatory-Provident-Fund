@@ -45,6 +45,7 @@ def main() -> None:
         annuity_option = st.selectbox(
             "Benefit Duration",
             ["5 years", "10 years", "15 years"],
+            disabled=True
         )
 
         if annuity_option == "5 years":
